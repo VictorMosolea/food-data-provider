@@ -79,14 +79,16 @@ int main() {
             sscanf(line, "%lf)", &drinkPrices[i]);
         }
     }
-
-    printf("The food data is:\n");
+    FILE *f;
+    f=fopen("data.txt","w");
+    fprintf(f,"%d:\n",noOfFoods);
     for (int i = 0; i < noOfFoods; i++) {
-        printf("%s: ", foods[i]);
+        fprintf(f,"%s: ", foods[i]);
         for (int j = 0; j < noOfSpecialities[i]; j++)
-            printf("(%s - %.2lf) ", specialities[i][j], prices[i][j]);
-        printf("\n");
+            fprintf(f,"(%s - %.2lf) ", specialities[i][j], prices[i][j]);
+        fprintf(f,"\n");
     }
+
 
     for (int i = 0; i < noOfFoods; i++) {
         for (int j = 0; j < noOfSpecialities[i]; j++)
@@ -101,15 +103,15 @@ int main() {
 
 
     if (noOfDrinks > 0) {
-        printf("\nThe drinks data is: \n");
-        printf("drinks: ");
+        fprintf(f,"%d:\n",noOfDrinks);
+        fprintf(f,"drinks: ");
         for (int i = 0; i < noOfDrinks - 1; i++)
-            printf("%s, ", drinks[i]);
-        printf("%s\n", drinks[noOfDrinks - 1]);
-        printf("prices: ");
+            fprintf(f,"%s, ", drinks[i]);
+        fprintf(f,"%s\n", drinks[noOfDrinks - 1]);
+        fprintf(f,"prices: ");
         for (int i = 0; i < noOfDrinks - 1; i++)
-            printf("%0.0lf, ", drinkPrices[i]);
-        printf("%0.0lf\n", drinkPrices[noOfDrinks - 1]);
+            fprintf(f,"%0.0lf, ", drinkPrices[i]);
+        fprintf(f,"%0.0lf\n", drinkPrices[noOfDrinks - 1]);
     }
 
     for (int i = 0; i < noOfDrinks; i++)
